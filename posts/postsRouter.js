@@ -83,24 +83,24 @@ router.post('/', (req, res) => {
 
 //post comments
 
-// router.post('/:id/comments', (req, res) => {
-//     const id = req.params.id;
+router.post('/:id/comments', (req, res) => {
+    const id= req.params.id;
 
-//     const { text } = req.body;
-//     if (!text) {
-//         res.status(400).json({ errorMessage: "Please provide title and contents for the post." })
-//     } else {
-//         db.insertComment(id,req.body)
+    const { text } = req.body;
+    if (!text) {
+        res.status(400).json({ errorMessage: "Please provide title and contents for the post." })
+    } else {
+        db.insertComment(req.body)
 
-//             .then(comment => {
-//                 res.status(201).json(comment);
-//             })
-//             .catch(err => {
-//                 console.log('error', err);
-//                 res.status(500).json({ error: "There was an error while saving the post to the database" })
-//             })
-//     }
-// })
+            .then(comment => {
+                res.status(201).json(comment);
+            })
+            .catch(err => {
+                console.log('error', err);
+                res.status(500).json({ error: "There was an error while saving the post to the database" })
+            })
+    }
+})
 
 
 
@@ -134,7 +134,7 @@ router.put('/:id', (req, res) => {
 
 //delete
 router.delete('/:id', (req, res) => {
-    const id = req.params.id;
+    const {id} = req.params.id;
     db.remove(id)
 
         .then(removed => {
