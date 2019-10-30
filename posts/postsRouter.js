@@ -134,7 +134,7 @@ router.put('/:id', (req, res) => {
 
 //delete
 router.delete('/:id', (req, res) => {
-    const {id} = req.params.id;
+    const id = req.params.id;
     db.remove(id)
 
         .then(removed => {
