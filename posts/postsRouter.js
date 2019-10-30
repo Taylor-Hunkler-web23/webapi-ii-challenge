@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/comments', (req, res) => {
     const id = req.params.id;
-    db.findCommentById(id)
+    db.findPostComments(id)
         .then(comment => {
             if (comment.length) {
                 res.status(200).json(comment);
@@ -86,7 +86,7 @@ router.post('/', (req, res) => {
 router.post('/:id/comments', (req, res) => {
     const id= req.params.id;
 
-    const { text } = req.body;
+    const { text, post_id } = req.body;
     if (!text) {
         res.status(400).json({ errorMessage: "Please provide title and contents for the post." })
     } else {
